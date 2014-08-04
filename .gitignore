@@ -1,0 +1,7 @@
+# Required composer dependencies
+/vendor/*
+/web/css/*
+/web/js/*
+/web/fonts/*
+node_modules/*
+composer.phar

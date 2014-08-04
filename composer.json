@@ -1,0 +1,12 @@
+{
+    "name": "dfritsch/calculator",
+    "version": "0.0.1",
+    "description": "Numeric calculator processor",
+    "keywords": ["calculator"],
+    "license": "All Rights Reserved",
+    "autoload": {
+        "psr-0": {
+            "Calculator": "src/"
+        }
+    }
+}
