@@ -4,7 +4,7 @@ namespace Calculator;
 class Calculator {
     protected static $input = null;
     protected static $response = null;
-    private static $operators = array(
+    protected static $operators = array(
         0 => array(
             '*' => 'multiply',
             '/' => 'divide',
