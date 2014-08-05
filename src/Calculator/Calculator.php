@@ -92,14 +92,8 @@ class Calculator {
     *
     * THIS IS A VERY EARLY IMPLEMENTATION!
     * Features still to be solved:
-    * -
-    * -
-    * -
-    * -
-    * -
-    * -
-    * -
-    * -
+    * - Parenthesis
+    * - Exponents
     */
     protected function process()
     {
@@ -109,8 +103,7 @@ class Calculator {
             throw new \RuntimeException('No string to process', 500);
         }
 
-        // regularize whitespace
-        $working_input = trim(preg_replace('/\s+/', ' ', $working_input));
+        $working_input = self::cleanInput($working_input);
 
         // split on whitespace (should be number, operator, number, operator... pattern)
         $elements = explode(' ', $working_input);
@@ -127,6 +120,23 @@ class Calculator {
         } else {
             throw new \RuntimeException('Error processing input string. Invalid value found.', 500);
         }
+    }
+
+    private static function cleanInput($input)
+    {
+        // load operators that we understand
+        $ops = array();
+        foreach (self::$operators as $layer) {
+            $ops = array_merge($ops, array_keys($layer));
+        }
+        $ops = implode('', $ops);
+
+        // regularize whitespace, first pad operators, then squeeze multiple spaces and other whitespace
+        $regex = '/['.preg_quote($ops, '/').']/';
+        $input = preg_replace($regex, " $0 ", $input);
+        $input = trim(preg_replace('/\s+/', ' ', $input));
+
+        return $input;
     }
 
     private static function processOperators(array $elements, array $operators)
