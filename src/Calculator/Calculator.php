@@ -25,7 +25,7 @@ class Calculator {
     * (float) parsed value
     * Throws an exception if missing input
     */
-    public function calculate($string = null)
+    public function calculate($string = null, $precision = 2)
     {
         if (!is_null($string)) {
             self::setInput($string);
@@ -35,7 +35,12 @@ class Calculator {
             throw new \RuntimeException('No input to process', 500);
         }
 
-        return self::process();
+        $value = self::process();
+        if (is_int($precision) && $precision >= 0) {
+            return round($value, $precision);
+        } else {
+            return $value;
+        }
     }
 
     /*
